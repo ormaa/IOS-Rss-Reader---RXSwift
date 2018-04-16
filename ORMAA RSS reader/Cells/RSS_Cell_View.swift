@@ -15,6 +15,20 @@ class RSS_Cell_View: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var desc: UILabel!
     
+    // if set, create an uiimage, and display it
+    var imageData: Data? {
+        didSet {
+            if imageData != nil {
+                let img = UIImage(data: imageData!)
+                if img != nil {
+                    DispatchQueue.main.async {
+                        self.thumbnail.image = img
+                    }
+                }
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         
     }

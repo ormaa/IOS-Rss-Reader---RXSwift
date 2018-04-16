@@ -22,9 +22,8 @@
                                 <rect key="frame" x="8" y="54" width="359" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="mn3-2Q-zGj">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="mn3-2Q-zGj">
+                                <rect key="frame" x="169" y="325" width="37" height="37"/>
                                 <color key="color" red="1" green="0.0" blue="0.034920876080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -33,7 +32,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QdI-NV-OkT" secondAttribute="bottom" constant="10" id="7gj-R6-emE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QdI-NV-OkT" secondAttribute="trailing" constant="8" id="d6r-dW-jis"/>
                             <constraint firstItem="QdI-NV-OkT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="gcE-Pf-aqf"/>
+                            <constraint firstItem="mn3-2Q-zGj" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="lKR-d4-vYa"/>
                             <constraint firstItem="QdI-NV-OkT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="34" id="pHe-xx-6x7"/>
+                            <constraint firstItem="mn3-2Q-zGj" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="wQv-aj-OEC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

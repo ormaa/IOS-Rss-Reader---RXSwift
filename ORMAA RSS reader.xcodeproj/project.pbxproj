@@ -12,11 +12,14 @@
 		090D8D902075738F006C9274 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 090D8D8E2075738F006C9274 /* Main.storyboard */; };
 		090D8D9220757390006C9274 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 090D8D9120757390006C9274 /* Assets.xcassets */; };
 		090D8D9520757390006C9274 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 090D8D9320757390006C9274 /* LaunchScreen.storyboard */; };
-		090D8D9D207573AB006C9274 /* RSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090D8D9C207573AB006C9274 /* RSS.swift */; };
+		090D8D9D207573AB006C9274 /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090D8D9C207573AB006C9274 /* FeedParser.swift */; };
 		090D8D9F20757A64006C9274 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090D8D9E20757A64006C9274 /* Extensions.swift */; };
 		09E370432076167600A5BC19 /* ViewController_Tableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E370422076167600A5BC19 /* ViewController_Tableview.swift */; };
 		09E370452076171900A5BC19 /* RSS_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09E370442076171900A5BC19 /* RSS_Cell.xib */; };
 		09E370472076173200A5BC19 /* RSS_Cell_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E370462076173200A5BC19 /* RSS_Cell_View.swift */; };
+		09ED5AF72084B8150009DFF7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ED5AF62084B8150009DFF7 /* ViewModel.swift */; };
+		09ED5AF92084B87F0009DFF7 /* RSSItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ED5AF82084B87F0009DFF7 /* RSSItem.swift */; };
+		09ED5AFB2084BBE50009DFF7 /* HTML_Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ED5AFA2084BBE50009DFF7 /* HTML_Tool.swift */; };
 		B101BD430045D775B8F23FC1 /* Pods_ORMAA_RSS_reader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 024D8E71E22096E8CFF181A0 /* Pods_ORMAA_RSS_reader.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,11 +32,14 @@
 		090D8D9120757390006C9274 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		090D8D9420757390006C9274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		090D8D9620757390006C9274 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		090D8D9C207573AB006C9274 /* RSS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSS.swift; sourceTree = "<group>"; };
+		090D8D9C207573AB006C9274 /* FeedParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParser.swift; sourceTree = "<group>"; };
 		090D8D9E20757A64006C9274 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		09E370422076167600A5BC19 /* ViewController_Tableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController_Tableview.swift; sourceTree = "<group>"; };
 		09E370442076171900A5BC19 /* RSS_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RSS_Cell.xib; sourceTree = "<group>"; };
 		09E370462076173200A5BC19 /* RSS_Cell_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSS_Cell_View.swift; sourceTree = "<group>"; };
+		09ED5AF62084B8150009DFF7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		09ED5AF82084B87F0009DFF7 /* RSSItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSItem.swift; sourceTree = "<group>"; };
+		09ED5AFA2084BBE50009DFF7 /* HTML_Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTML_Tool.swift; sourceTree = "<group>"; };
 		4A720F805C4DC1C1F8197A49 /* Pods-ORMAA RSS reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ORMAA RSS reader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ORMAA RSS reader/Pods-ORMAA RSS reader.debug.xcconfig"; sourceTree = "<group>"; };
 		B6549E79529304F991CC84E5 /* Pods-ORMAA RSS reader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ORMAA RSS reader.release.xcconfig"; path = "Pods/Target Support Files/Pods-ORMAA RSS reader/Pods-ORMAA RSS reader.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,19 +85,46 @@
 		090D8D892075738F006C9274 /* ORMAA RSS reader */ = {
 			isa = PBXGroup;
 			children = (
-				090D8D8A2075738F006C9274 /* AppDelegate.swift */,
+				09ED5AF32084B7A10009DFF7 /* Supporting files */,
+				09ED5AF42084B7C30009DFF7 /* Extensions */,
+				09ED5AF52084B7D50009DFF7 /* Cells */,
+				09ED5AF82084B87F0009DFF7 /* RSSItem.swift */,
+				090D8D9C207573AB006C9274 /* FeedParser.swift */,
+				09ED5AF62084B8150009DFF7 /* ViewModel.swift */,
 				090D8D8C2075738F006C9274 /* ViewController.swift */,
 				09E370422076167600A5BC19 /* ViewController_Tableview.swift */,
-				09E370442076171900A5BC19 /* RSS_Cell.xib */,
-				09E370462076173200A5BC19 /* RSS_Cell_View.swift */,
-				090D8D9C207573AB006C9274 /* RSS.swift */,
 				090D8D8E2075738F006C9274 /* Main.storyboard */,
+				09ED5AFA2084BBE50009DFF7 /* HTML_Tool.swift */,
+			);
+			path = "ORMAA RSS reader";
+			sourceTree = "<group>";
+		};
+		09ED5AF32084B7A10009DFF7 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
 				090D8D9120757390006C9274 /* Assets.xcassets */,
 				090D8D9320757390006C9274 /* LaunchScreen.storyboard */,
 				090D8D9620757390006C9274 /* Info.plist */,
+				090D8D8A2075738F006C9274 /* AppDelegate.swift */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		09ED5AF42084B7C30009DFF7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
 				090D8D9E20757A64006C9274 /* Extensions.swift */,
 			);
-			path = "ORMAA RSS reader";
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		09ED5AF52084B7D50009DFF7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				09E370442076171900A5BC19 /* RSS_Cell.xib */,
+				09E370462076173200A5BC19 /* RSS_Cell_View.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		FD63F7BAAFF94F5E2C92362C /* Pods */ = {
@@ -218,12 +251,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09ED5AF72084B8150009DFF7 /* ViewModel.swift in Sources */,
 				09E370432076167600A5BC19 /* ViewController_Tableview.swift in Sources */,
+				09ED5AFB2084BBE50009DFF7 /* HTML_Tool.swift in Sources */,
 				09E370472076173200A5BC19 /* RSS_Cell_View.swift in Sources */,
 				090D8D8D2075738F006C9274 /* ViewController.swift in Sources */,
 				090D8D8B2075738F006C9274 /* AppDelegate.swift in Sources */,
-				090D8D9D207573AB006C9274 /* RSS.swift in Sources */,
+				090D8D9D207573AB006C9274 /* FeedParser.swift in Sources */,
 				090D8D9F20757A64006C9274 /* Extensions.swift in Sources */,
+				09ED5AF92084B87F0009DFF7 /* RSSItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,9 +406,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QP9H83DB6M;
-				INFOPLIST_FILE = "ORMAA RSS reader/Info.plist";
+				INFOPLIST_FILE = "ORMAA RSS reader/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.ormaa.ORMAA-RSS-reader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -387,9 +426,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QP9H83DB6M;
-				INFOPLIST_FILE = "ORMAA RSS reader/Info.plist";
+				INFOPLIST_FILE = "ORMAA RSS reader/Supporting files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.ormaa.ORMAA-RSS-reader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

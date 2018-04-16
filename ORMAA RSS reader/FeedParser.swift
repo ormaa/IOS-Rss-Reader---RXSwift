@@ -8,25 +8,10 @@
 
 import Foundation
 
-class RSSItem {
-    var currentTitle = ""
-    var currentDescription = ""
-    var currentPubDate = ""
-
-    var titleStr = ""
-    var descriptionStr = ""
-    var imageStr = ""
-    
-    init(title: String, description: String, pubDate: String) {
-        self.currentTitle = title
-        self.currentPubDate = pubDate
-        self.currentDescription = description
-    }
-}
 
 class FeedParser: NSObject, XMLParserDelegate
 {
-// 2
+
     private var rssItems: [RSSItem] = []
     private var currentElement = ""
     private var currentTitle: String = "" {
@@ -46,10 +31,57 @@ class FeedParser: NSObject, XMLParserDelegate
         didSet { currentPubDate = currentPubDate.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
         }
-        
     }
+    
+    
+    // Add some content to item array
+    
+    // will search images in the RSS description. if found, use the first one as image thumbnail, to display the RSS sumary.
+    //
+    func searchForImages(rssItems: [RSSItem]) -> [RSSItem]{
+        
+        for item in rssItems {
+            let str = item.currentTitle.stringByDecodingHTMLEntities
+            //let str2 = item.currentDescription.stringByDecodingHTMLEntities
+            item.titleStr = str
+            
+            item.descriptionStr = HTML_Tool().HtmlToPlainText(html: item.currentDescription)
+            
+            // search for an image, in description
+            // TODO : could be done in better way...
+            if let index = item.currentDescription.index(of: "<img src=") {
+                let str3 = item.currentDescription.suffix(from: index)
+                if let index2 = str3.index(of: ".jpg") {
+                    let str4 = (str3.prefix(upTo: index2) + ".jpg").replacingOccurrences(of: "<img src=\"", with: "")
+                    //print(str4)
+                    item.imageStr = str4
+                }
+                else {
+                    if let index3 = str3.index(of: ".jpeg") {
+                        let str4 = (str3.prefix(upTo: index3) + ".jpeg").replacingOccurrences(of: "<img src=\"", with: "")
+                        //print(str4)
+                        item.imageStr = str4
+                    }
+                }
+                
+            }
+        }
+        return rssItems
+    }
+    
+    
+    
+    
+    // XML parsing area
+    
+    
+    
+    
     private var parserCompletionHandler: (([RSSItem]) -> Void)?
-// 3
+
+    
+    // parse a feed content in XML format.
+    // Call completion handler with array of RSSItem
     func parseFeed(url: String, completionHandler: (([RSSItem]) -> Void)?)
     {
         self.parserCompletionHandler = completionHandler
@@ -71,20 +103,22 @@ class FeedParser: NSObject, XMLParserDelegate
         task.resume()
     
 }
-// MARK: - XML Parser Delegate
-// 4
+    
+    // XML Parser Delegate
+
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-// we assign the name of the element to currentElement, if the item tag is found, we reset the temporary variables of title, description and pubdate for later use
+        // we assign the name of the element to currentElement,
+        //if the item tag is found, we reset the temporary variables of title, description and pubdate for later use
         currentElement = elementName
         if currentElement == "item" {
             currentTitle = ""
             currentDescription = ""
             currentPubDate = ""
-            
         }
         
     }
-// 5 - when the value of an element is found, this method gets called with a string representation of part of the characters of the current element
+    
+    // when the value of an element is found, this method gets called with a string representation of part of the characters of the current element
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         switch currentElement {
         case "title": currentTitle += string
@@ -92,7 +126,7 @@ class FeedParser: NSObject, XMLParserDelegate
         case "pubDate": currentPubDate += string default: break }
         
     }
-// 6 - when we reach the closing tag /item is found, this method gets called
+    // when we reach the closing tag /item is found, this method gets called
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "item" {
             let rssItem = RSSItem(title: currentTitle, description: currentDescription, pubDate: currentPubDate)
@@ -102,8 +136,17 @@ class FeedParser: NSObject, XMLParserDelegate
         
     }
     
+    // xml content parsed until the end of document.
     func parserDidEndDocument(_ parser: XMLParser) {
-        parserCompletionHandler?(rssItems)
+        
+        // do the process in background, it is long :o)
+        DispatchQueue.global(qos: .background).async { //[weak self] in
+
+            // update the array by adding images url, when available
+            let rssItemArray = self.searchForImages(rssItems: self.rssItems)
+            // Return the parsed rssitems array
+            self.parserCompletionHandler?(rssItemArray)
+        }
     }
 }
 
